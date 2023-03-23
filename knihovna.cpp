@@ -21,14 +21,6 @@ class Book{
         return obsah;
     };
 
-    std::string vypujcene_preson(Person *person){
-        std::string seznam="";
-        for(int i=0;i<knihovna->books.size();i++){
-            if(knihovna->books[i]->volna==0 && knihovna->books[i]->p_pujc->karticka==person->karticka){
-                seznam+=knihovna->books[i]->nazev+"\n";
-            }
-        }
-    };
 };
 
 class Ebook:Book{
@@ -57,6 +49,15 @@ std::string data;
 class Library{
     public: 
     std::vector<Book*>books;
+
+    std::string vypujcene_preson(Person *person){
+        std::string seznam="";
+        for(int i=0;i<books.size();i++){
+            if(books[i]->volna==0 && books[i]->p_pujc->karticka==person->karticka){
+                seznam+=books[i]->nazev+"\n";
+            }
+        }
+    };
     
 };
 
