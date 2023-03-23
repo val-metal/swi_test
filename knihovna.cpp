@@ -5,6 +5,7 @@ class Book{
     std::string zanr;
     std::string nazev;
     std::string autor;
+    std::string obsah;
     Person *p_pujc;
     Library *knihovna;
     bool volna=1;
@@ -12,6 +13,14 @@ class Book{
         volna=0; 
         p_pujc=person;
     };
+    void vrat(Person *person){
+        volna=1; 
+        p_pujc=nullptr;
+    };
+    virtual std::string vypis(Person *person){
+        return obsah;
+    };
+
     std::string vypujcene_preson(Person *person){
         std::string seznam="";
         for(int i=0;i<knihovna->books.size();i++){
@@ -23,9 +32,22 @@ class Book{
 };
 
 class Ebook:Book{
-    std::string obsah;
+    Obsah_ebook data;
+    
+    std::string vypis(Person *person){
+        std::string obsah_knihy=obsah;
+        if(p_pujc->karticka==person->karticka){
+            return obsah_knihy+ data.otevri();
+        }
+    };
+    
+};
+
+class Obsah_ebook{
+std::string data;
+    public:
     std::string otevri(){
-        return obsah;
+        return data;
     };
     void zavri(){
         return;
